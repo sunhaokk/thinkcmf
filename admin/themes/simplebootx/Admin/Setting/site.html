@@ -11,6 +11,8 @@
 			<li><a href="#E" data-toggle="tab">{:L('COMMENT_SETTING')}</a></li>
 			<li><a href="#F" data-toggle="tab">{:L("USERNAME_FILTER")}</a></li>
 			<li><a href="#G" data-toggle="tab">CDN设置</a></li>
+			<li><a href="#H" data-toggle="tab">货柜设置</a></li>
+			<li><a href="#H" data-toggle="tab">公司信息</a></li>
 		</ul>
 		<form class="form-horizontal js-ajax-forms" action="{:U('setting/site_post')}" method="post">
 			<fieldset>
@@ -189,6 +191,27 @@
 											例如未设置cdn前：jquery的访问地址是/public/js/jquery.js, 设置cdn是后它的访问地址就是：静态资源cdn地址+/public/js/jquery.js
 											
 										</span>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					<div class="tab-pane active" id="H">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">重量</label>
+									<div class="controls">
+										<input type="text" name="options[site_name]" value=""><span class="form-required">*</span>
+										<php>if($option_id):</php>
+										<input type="hidden" name="option_id" value="{$option_id}">
+										<php>endif;</php>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">体积</label>
+									<div class="controls">
+										<input type="text" name="options[site_admin_url_password]" value="{$site_admin_url_password}" id="js-site-admin-url-password"><span class="form-required">*</span>
+										<span class="help-block" style="color: red;"></span>
+										<php>$site_admin_url_password =C("SP_SITE_ADMIN_URL_PASSWORD");</php>
 									</div>
 								</div>
 							</fieldset>

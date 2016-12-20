@@ -1,0 +1,35 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Cargo/index')}">类型列表</a></li>
+			<li><a href="{:U('Cargo/cargo_add')}">添加类型</a></li>
+		</ul>
+		<form action="{:U('Rbac/listorders')}" method="post">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="30">ID</th>
+						<th align="left">型号名称</th>
+						<th align="left">备注</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="cargo" item="vo">
+					<tr>
+						<td>{$vo.cargo_type_id}</td>
+						<td>{$vo.cargo_type_name}</td>
+						<td>{$vo.cargo_type_remark}</td>
+						<td><a href="{:U('cargo/cargo_edit',array('cargo_type_id'=>$vo['cargo_type_id']))}">编辑</a>
+						<a class="js-ajax-delete" href="{:U('cargo/cargo_delete',array('cargo_type_id'=>$vo['cargo_type_id']))}">{:L('DELETE')}</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

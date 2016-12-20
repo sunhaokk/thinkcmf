@@ -1,0 +1,50 @@
+<admintpl file="header" />
+<style>
+.home_info li em {
+	float: left;
+	width: 120px;
+	font-style: normal;
+}
+li {
+	list-style: none;
+}
+</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="home_toptip"></div>
+
+		<h2 class="well"><span id="greetings"></span>,{:L('WELCOME_USER',array('username'=>empty($admin['user_url'])?$admin['user_login']:$admin['user_url']))}</h2>
+		<div class="home_info">
+			<ul class="inline" style="margin-left: 25px;">
+				<li>当前时间</li>
+				<li><script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></script></li>
+			</ul>
+		</div>
+		<h4 class="well">{:L('CONTRIBUTORS')}</h4>
+		<div class="">
+			<ul class="inline" style="margin-left: 25px;">
+				<li>橙果网络科技有限公司</li>
+				<li><a href="http://www.orangesoft.com.cn" target="_blank">OrangeSoft</a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+	var greetings = "", cur_time = new Date().getHours();
+		if(cur_time >= 0 && cur_time <= 4 ) {
+			greetings = "已经夜深了，请注意休息"
+		} else if (cur_time > 4 && cur_time <= 7 ) {
+			greetings = "早上好";
+		} else if (cur_time > 7 && cur_time < 12 ) {
+			greetings = "上午好";
+		} else if (cur_time >= 12 && cur_time <= 18 ) {
+			greetings = "下午好";
+		} else {
+			greetings = "晚上好";
+		};
+			$("#greetings").text(greetings);
+			$("#username").text(parent.SYSTEM.realName);
+	</script>
+</body>
+</html>

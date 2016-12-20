@@ -17,7 +17,7 @@ class MenuController extends AdminbaseController {
         $this->auth_rule_model = D("Common/AuthRule");
     }
 
-    // 后台菜单列表
+    // 后台所有菜单列表
     public function index() {
     	session('admin_menu_index','Menu/index');
         $result = $this->menu_model->order(array("listorder" => "ASC"))->select();
@@ -37,7 +37,7 @@ class MenuController extends AdminbaseController {
         	
         	$result[$n]['style'] = empty($r['parentid']) ? '' : 'display:none;';
         	
-            $result[$n]['str_manage'] = '<a href="' . U("Menu/add", array("parentid" => $r['id'], "menuid" => I("get.menuid"))) . '">'.L('ADD_SUB_MENU').'</a> | <a href="' . U("Menu/edit", array("id" => $r['id'], "menuid" => I("get.menuid"))) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("Menu/delete", array("id" => $r['id'], "menuid" => I("get.menuid")) ). '">'.L('DELETE').'</a> ';
+            $result[$n]['str_manage'] = '<a href="' . U("Menu/add", array("parentid" => $r['id'], "menuid" => I("get.menuid"))) . '">'.L('ADD_SUB_MENU').'</a> | <a href="' . U("Menu/edit", array("id" => $r['id'], "menuid" => I("get.menuid"))) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("Menu/delete", array("id" => $r['id'], "menuid" => I("get.menuid")) ). '">'.L('DELETE').'</a>';
             $result[$n]['status'] = $r['status'] ? L('DISPLAY') : L('HIDDEN');
             if(APP_DEBUG){
             	$result[$n]['app']=$r['app']."/".$r['model']."/".$r['action'];

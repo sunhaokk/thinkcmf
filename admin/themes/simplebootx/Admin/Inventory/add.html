@@ -1,0 +1,52 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{}">{:L('ADMIN_MENU_INDEX')}</a></li>
+			<li class="active"><a href="{}">{:L('ADMIN_MENU_ADD')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('Inventory/add')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">货柜名称:</label>
+					<div class="controls">
+						<input type="text" name="goods_name">
+						<span class="form-required">*</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">货柜重量:</label>
+					<div class="controls">
+						<input type="text" name="goods_weight" id="model">
+						<span class="form-required">*</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">货柜体积:</label>
+					<div class="controls">
+						<input type="text" name="goods_bulk" id="action">
+						<span class="form-required">*</span>
+					</div>
+				</div>
+				<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit" name="btn1">{:L('ADD')}</button>
+				<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
+			</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script src="__PUBLIC__/js/jquery.js"></script>
+	<script type="text/javascript">
+		//提交表单
+		$(function(){
+			//绑定提交按钮
+			$('#btn1').bind('click',function(){
+				//提交表单
+				$('form').sumbit();
+			})
+		})
+	</script>
+</body>
+</html>

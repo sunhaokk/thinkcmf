@@ -20,7 +20,24 @@ class iAuth{
     protected $_config = array(
     );
 
-    public function __construct() {
+    public function __construct($type = '') {
+        $this->_config['type'] = $type;
+        if($type != ''){
+            $tt = '';
+            $tt .= $type[0];
+            $n = strlen($type);
+            for($i=1; $n>$i; $i++){
+                $str = ord($type[$i]);
+                if($str > 64 && $str < 91){
+                    $tt .= '_';
+                }
+                $tt .= $type[$i];
+            }
+            if($n > 0) $tt.='_';
+            $this->_config['tt'] = strtoupper($tt);
+        }else{
+            $this->_config['tt'] = '';
+        }
     }
 
     /**
@@ -37,6 +54,7 @@ class iAuth{
     	if($uid==1){
     		return true;
     	}
+        //echo $name;
         if (is_string($name)) {
             $name = strtolower($name);
             if (strpos($name, ',') !== false) {
@@ -45,43 +63,65 @@ class iAuth{
                 $name = array($name);
             }
         }
+        //echo $name;
+        //exit;
         $list = array(); //保存验证通过的规则名
         
-        $role_user_model=M("RoleUser");
+        $role_user_model=M($this->_config['type'] . "RoleUser");
         
-        $role_user_join = '__ROLE__ as b on a.role_id =b.id';
+        $role_user_join = '__'.$this->_config['tt'].'ROLE__ as b on a.role_id =b.id';
         
         $groups=$role_user_model->alias("a")->join($role_user_join)->where(array("user_id"=>$uid,"status"=>1))->getField("role_id",true);
-        
+
+        /*echo $role_user_model ->getLastSql();
+        exit;*/
+
         if(in_array(1, $groups)){
         	return true;
         }
-
         if(empty($groups)){
         	return false;
         }
-        
-        $auth_access_model=M("AuthAccess");
-        
-        $join = '__AUTH_RULE__ as b on a.rule_name =b.name';
-        
-        $rules=$auth_access_model->alias("a")->join($join)->where(array("a.role_id"=>array("in",$groups),"b.name"=>array("in",$name)))->select();
-        
-        foreach ($rules as $rule){
-        	if (!empty($rule['condition'])) { //根据condition进行验证
-        		$user = $this->getUserInfo($uid);//获取用户信息,一维数组
-        	
-        		$command = preg_replace('/\{(\w*?)\}/', '$user[\'\\1\']', $rule['condition']);
-        		//dump($command);//debug
-        		@(eval('$condition=(' . $command . ');'));
-        		if ($condition) {
-        			$list[] = strtolower($rule['name']);
-        		}
-        	}else{
-        		$list[] = strtolower($rule['name']);
-        	}
+        if($this->_config['type'] == ''){
+            $auth_access_model=M("AuthAccess");
+            $join = '__AUTH_RULE__ as b on a.rule_name =b.name';
+            $rules=$auth_access_model->alias("a")->join($join)->where(array("a.role_id"=>array("in",$groups),"b.name"=>array("in",$name)))->select();
+            foreach ($rules as $rule){
+                if (!empty($rule['condition'])) { //根据condition进行验证
+                    $user = $this->getUserInfo($uid);//获取用户信息,一维数组
+                
+                    $command = preg_replace('/\{(\w*?)\}/', '$user[\'\\1\']', $rule['condition']);
+                    //dump($command);//debug
+                    @(eval('$condition=(' . $command . ');'));
+                    if ($condition) {
+                        $list[] = strtolower($rule['name']);
+                    }
+                }else{
+                    $list[] = strtolower($rule['name']);
+                }
+            }
+        }else{
+            $auth_access_model=M($this->_config['type'] . "AuthAccess");
+            $rules=$auth_access_model->where(array("role_id"=>array("in",$groups),"rule_name"=>array("in",$name)))->select();
+            //echo $auth_access_model->getLastSql();
+            //print_r($rules);exit;
+            foreach ($rules as $rule){
+                if (!empty($rule['condition'])) { //根据condition进行验证
+                    $user = $this->getUserInfo($uid);//获取用户信息,一维数组
+                    $command = preg_replace('/\{(\w*?)\}/', '$user[\'\\1\']', $rule['condition']);
+                    //dump($command);//debug
+                    @(eval('$condition=(' . $command . ');'));
+                    if ($condition) {
+                        $list[] = strtolower($rule['rule_name']);
+                    }
+                }else{
+                    $list[] = strtolower($rule['rule_name']);
+                }
+            }
+
         }
-        
+        /*echo $auth_access_model ->getLastSql();
+        exit;*/
         if ($relation == 'or' and !empty($list)) {
             return true;
         }
@@ -102,5 +142,4 @@ class iAuth{
     	}
     	return $userinfo[$uid];
     }
-
 }

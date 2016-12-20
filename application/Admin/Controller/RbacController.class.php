@@ -139,8 +139,8 @@ class RbacController extends AdminbaseController {
     		}
     		if (is_array($_POST['menuid']) && count($_POST['menuid'])>0) {
     			
-    			$menu_model=M("Menu");
-    			$auth_rule_model=M("AuthRule");
+    			$menu_model=M("WuliuMenu");
+    			$auth_rule_model=M("WuliuAuthRule");
     			$this->auth_access_model->where(array("role_id"=>$roleid,'type'=>'admin_url'))->delete();
     			foreach ($_POST['menuid'] as $menuid) {
     				$menu=$menu_model->where(array("id"=>$menuid))->field("app,model,action")->find();

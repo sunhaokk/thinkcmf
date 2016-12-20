@@ -1,0 +1,40 @@
+<?php
+return array (
+  'app' => 'Wuliu',
+  'model' => 'Inventory',
+  'action' => 'default',
+  'data' => '',
+  'type' => '1',
+  'status' => '1',
+  'name' => '仓库管理',
+  'icon' => 'cloud',
+  'remark' => '',
+  'listorder' => '0',
+  'children' => 
+  array (
+    array (
+      'app' => 'Wuliu',
+      'model' => 'Inventory',
+      'action' => 'inventory',
+      'data' => '',
+      'type' => '1',
+      'status' => '1',
+      'name' => '库存列表',
+      'icon' => 'cloud',
+      'remark' => '',
+      'listorder' => '0',
+    ),
+    array (
+      'app' => 'Wuliu',
+      'model' => 'Inventory',
+      'action' => 'add',
+      'data' => '',
+      'type' => '1',
+      'status' => '1',
+      'name' => '添加',
+      'icon' => '',
+      'remark' => '',
+      'listorder' => '0',
+    ),
+  ),
+);

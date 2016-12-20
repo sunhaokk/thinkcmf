@@ -25,7 +25,7 @@ $configs= array(
         'THIRD_UDER_ACCESS'		=> false, //第三方用户是否有全部权限，没有则需绑定本地账号
         /* 标签库 */
         'TAGLIB_BUILD_IN' => THINKCMF_CORE_TAGLIBS,
-        'MODULE_ALLOW_LIST'  => array('Admin','Portal','Asset','Api','User','Wx','Comment','Qiushi','Tpl','Topic','Install','Bug','Better','Pay','Cas'),
+        'MODULE_ALLOW_LIST'  => array('Admin','Trade','Wuliu','Portal','Asset','Api','User','Wx','Comment','Qiushi','Tpl','Topic','Install','Bug','Better','Pay','Cas'),
         'TMPL_DETECT_THEME'     => false,       // 自动侦测模板主题
         'TMPL_TEMPLATE_SUFFIX'  => '.html',     // 默认模板文件后缀
         'DEFAULT_MODULE'        =>  'Portal',  // 默认模块
@@ -55,9 +55,25 @@ $configs= array(
         'SP_TMPL_ACTION_SUCCESS' 	=> 'success', // 默认成功跳转对应的模板文件,注：相对于前台模板路径
         'SP_ADMIN_STYLE'		=> 'flat',
         'SP_ADMIN_TMPL_PATH'    => 'admin/themes/',       // 各个项目后台模板文件根目录
-        'SP_ADMIN_DEFAULT_THEME'=> 'simplebootx',       // 各个项目后台模板文件
+        'SP_ADMIN_DEFAULT_THEME'=> 'simplebootx', 
         'SP_ADMIN_TMPL_ACTION_ERROR' 	=> 'Admin/error.html', // 默认错误跳转对应的模板文件,注：相对于后台模板路径
         'SP_ADMIN_TMPL_ACTION_SUCCESS' 	=> 'Admin/success.html', // 默认成功跳转对应的模板文件,注：相对于后台模板路径
+        
+        
+        'TRADE_LANG_SWITCH_ON'        =>  false,   // 后台开启语言包功能
+        'SP_TRADE_STYLE'		=> 'flat',
+        'SP_TRADE_TMPL_PATH'    => 'trade/themes/',       // 各个项目后台模板文件根目录
+        'SP_TRADE_DEFAULT_THEME'=> 'simplebootx',         // 各个项目后台模板文件
+        'SP_TRADE_TMPL_ACTION_ERROR' 	=> 'Trade/error.html', // 默认错误跳转对应的模板文件,注：相对于后台模板路径
+        'SP_TRADE_TMPL_ACTION_SUCCESS' 	=> 'Trade/success.html', // 默认成功跳转对应的模板文件,注：相对于后台模板路径
+        
+        'WULIU_LANG_SWITCH_ON'  =>  false,   // 后台开启语言包功能
+        'SP_WULIU_STYLE'        => 'flat',
+        'SP_WULIU_TMPL_PATH'    => 'wuliu/themes/',       // 各个项目后台模板文件根目录
+        'SP_WULIU_DEFAULT_THEME'=> 'simplebootx',         // 各个项目后台模板文件
+        'SP_WULIU_TMPL_ACTION_ERROR'    => 'Wuliu/error.html', // 默认错误跳转对应的模板文件,注：相对于后台模板路径
+        'SP_WULIU_TMPL_ACTION_SUCCESS'  => 'Wuliu/success.html', // 默认成功跳转对应的模板文件,注：相对于后台模板路径
+        
         'TMPL_EXCEPTION_FILE'   => SITE_PATH.'public/exception.html',
         
         'AUTOLOAD_NAMESPACE' => array('plugins' => './plugins/'), //扩展模块列表

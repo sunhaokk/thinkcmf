@@ -91,6 +91,13 @@ class SettingController extends AdminbaseController{
 		$this->display();
 	}
 	
+	public function company(){
+		$this->display();
+	}
+
+		public function wuliu(){
+		$this->display();
+	}
 	// 密码修改提交
 	public function password_post(){
 		if (IS_POST) {

@@ -1,0 +1,35 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('library/index')}">货柜列表</a></li>
+			<li><a href="{:U('container/container_add')}">添加货柜</a></li>
+		</ul>
+		<form action="{:U('Rbac/listorders')}" method="post">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="30">ID</th>
+						<th align="left">体积（m³）</th>
+						<th align="left">重量（吨）</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="container" item="vo">
+					<tr>
+						<td>{$vo.container_id}</td>
+						<td>{$vo.container_bulk}</td>
+						<td>{$vo.container_weight}</td>
+						<td><a href="{:U('container/container_edit',array('container_id'=>$vo['container_id']))}">编辑</a>
+						<a class="js-ajax-delete" href="{:U('container/container_delete',array('container_id'=>$vo['container_id']))}">{:L('DELETE')}</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

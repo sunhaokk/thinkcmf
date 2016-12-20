@@ -1,0 +1,37 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('library/index')}">仓库列表</a></li>
+			<li><a href="{:U('Library/library_add')}">添加仓库</a></li>
+		</ul>
+		<form action="{:U('Rbac/listorders')}" method="post">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="30">ID</th>
+						<th align="left">仓库地址</th>
+						<th align="left">负责人联系方式</th>
+						<th width="120" align="left">负责人</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="library" item="vo">
+					<tr>
+						<td>{$vo.warehouse_id}</td>
+						<td>{$vo.warehouse_add}</td>
+						<td>{$vo.warehouse_principal}</td>
+						<td>{$vo.warehouse_principal_contact}</td>
+						<td><a href="{:U('library/library_edit',array('warehouse_id'=>$vo['warehouse_id']))}">编辑</a>
+						<a class="js-ajax-delete" href="{:U('library/library_delete',array('warehouse_id'=>$vo['warehouse_id']))}">{:L('DELETE')}</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

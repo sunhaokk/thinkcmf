@@ -1,0 +1,46 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('User/wuliuinfo')}">公司信息</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Wuliu/wuliuinfo_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>公司名称</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="wuliu_name" value="{$wuliu_name}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>负责人</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="wuliu_principal" value="{$wuliu_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>公司地址</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="wuliu_add" value="{$wuliu_add}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>联系方式</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="wuliu_contact" value="{$wuliu_contact}" required>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

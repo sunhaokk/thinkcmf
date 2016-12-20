@@ -1,0 +1,39 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Library/Library_edit')}">仓库编辑</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Library/Library_editok')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>仓库地址</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="warehouse_add" value="{$library.warehouse_add}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>负责人</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="warehouse_principal" value="{$library.warehouse_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>公司地址</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="warehouse_principal_contact" value="{$library.warehouse_principal_contact}" required>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

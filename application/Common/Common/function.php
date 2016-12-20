@@ -2,17 +2,21 @@
 /**
  * 获取当前登录的管事员id
  * @return int
+ * 2016-12-12 14:34:11
+ * 添加type用于不同的后端获取session
  */
-function get_current_admin_id(){
-	return session('ADMIN_ID');
+function get_current_admin_id($type = 'ADMIN_ID'){
+	return session($type);
 }
 
 /**
  * 获取当前登录的管事员id
  * @return int
+ * 2016-12-12 14:34:11
+ * 添加type用于不同的后端获取session
  */
-function sp_get_current_admin_id(){
-	return session('ADMIN_ID');
+function sp_get_current_admin_id($type = 'ADMIN_ID'){
+	return session($type);
 }
 
 /**
@@ -1720,15 +1724,14 @@ function sp_plugin_url($url, $param = array(),$domain=false){
  * @param relation string    如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
  * @return boolean           通过验证返回true;失败返回false
  */
-function sp_auth_check($uid,$name=null,$relation='or'){
+function sp_auth_check($uid,$name=null,$relation='or', $type = ''){
 	if(empty($uid)){
 		return false;
 	}
-
-	$iauth_obj=new \Common\Lib\iAuth();
 	if(empty($name)){
 		$name=strtolower(MODULE_NAME."/".CONTROLLER_NAME."/".ACTION_NAME);
 	}
+	$iauth_obj=new \Common\Lib\iAuth($type);
 	return $iauth_obj->check($uid, $name, $relation);
 }
 

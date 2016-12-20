@@ -5,7 +5,6 @@
  */
 namespace Common\Controller;
 use Common\Controller\AppframeController;
-
 class AdminbaseController extends AppframeController {
 
 	public function __construct() {

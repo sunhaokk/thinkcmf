@@ -3,9 +3,7 @@
  * 后台首页
  */
 namespace Admin\Controller;
-
 use Common\Controller\AdminbaseController;
-
 class IndexController extends AdminbaseController {
 	
 	public function _initialize() {
@@ -19,7 +17,6 @@ class IndexController extends AdminbaseController {
      */
     public function index() {
         $this->load_menu_lang();
-    	
         $this->assign("menus", D("Common/Menu")->menu_json());
        	$this->display();
     }

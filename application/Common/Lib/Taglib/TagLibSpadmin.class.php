@@ -21,6 +21,8 @@ class TagLibSpadmin extends TagLib {
     protected $tags = array(
         //后台模板标签
         'admintpl' => array("attr" => "file", "close" => 0),
+        'tradetpl' => array("attr" => "file", "close" => 0),
+        'wuliutpl' => array("attr" => "file", "close" => 0),
     );
 
     /**
@@ -52,7 +54,66 @@ class TagLibSpadmin extends TagLib {
         $parseStr = $this->tpl->parse($tmplContent);
         return $parseStr;
     }
+   
+    /**
+     * 模板包含标签 
+     * 格式
+     * <admintpl file="APP/模块/模板"/>
+     * @staticvar array $_admintemplateParseCache
+     * @param type $attr 属性字符串
+     * @param type $content 标签内容
+     * @return array 
+     */
+    public function _tradetpl($tag, $content) {
+        $file = $tag['file'];
+        $counts = count($file);
+        if ($counts < 3) {
+            $file_path = "Trade" .  "/" . $tag['file'];
+        } else {
+            $file_path = $file[0] . "/" . "Tpl" . "/" . $file[1] . "/" . $file[2];
+        }
+        //模板路径
+        $TemplatePath = sp_add_template_file_suffix( C("SP_TRADE_TMPL_PATH") .C("SP_TRADE_DEFAULT_THEME")."/". $file_path );
+        //判断模板是否存在
+        if (!file_exists_case($TemplatePath)) {
+            return false;
+        }
+        //读取内容
+        $tmplContent = file_get_contents($TemplatePath);
+        //解析模板内容
+        $parseStr = $this->tpl->parse($tmplContent);
+        return $parseStr;
+    } 
     
+    /**
+     * 模板包含标签 
+     * 格式
+     * <admintpl file="APP/模块/模板"/>
+     * @staticvar array $_admintemplateParseCache
+     * @param type $attr 属性字符串
+     * @param type $content 标签内容
+     * @return array 
+     */
+    public function _wuliutpl($tag, $content) {
+        $file = $tag['file'];
+        $counts = count($file);
+        if ($counts < 3) {
+            $file_path = "Wuliu" .  "/" . $tag['file'];
+        } else {
+            $file_path = $file[0] . "/" . "Tpl" . "/" . $file[1] . "/" . $file[2];
+        }
+        //模板路径
+        $TemplatePath = sp_add_template_file_suffix( C("SP_WULIU_TMPL_PATH") .C("SP_WULIU_DEFAULT_THEME")."/". $file_path );
+        //判断模板是否存在
+        if (!file_exists_case($TemplatePath)) {
+            return false;
+        }
+        //读取内容
+        $tmplContent = file_get_contents($TemplatePath);
+        //解析模板内容
+        $parseStr = $this->tpl->parse($tmplContent);
+        return $parseStr;
+    } 
     
 
 }

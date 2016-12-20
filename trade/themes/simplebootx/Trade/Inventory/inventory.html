@@ -1,0 +1,61 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>货物列表</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Indexadmin/index')}">
+			货物ID： 
+			<input type="text" name="uid" style="width: 100px;" value="{:I('request.uid')}" placeholder="请输入货物ID">
+			关键字： 
+			<input type="text" name="keyword" style="width: 200px;" value="{:I('request.keyword')}" placeholder="货物编号/货物名称">
+			<input type="submit" class="btn btn-primary" value="搜索" />
+			<a class="btn btn-danger" href="{:U('Indexadmin/index')}">清空</a>
+		</form>
+		<form method="post" class="js-ajax-form">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th align="center">ID</th>
+						<th>货物编号</th>
+						<th>货物名称</th>
+						<th>货物重量</th>
+						<th>货物体积</th>
+						<th>货物数量</th>
+						<th>货物单价</th>
+						<th>货物类型</th>
+						<th align="center">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php>
+					<volist name="data" id="vo">
+					<tr>
+						<td align="center">{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td>{$vo.id}</td>
+						<td align="center">
+							<neq name="vo.id" value="1">
+								<a href="{:U('inventory/add',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="{:L('BLOCK_USER_CONFIRM_MESSAGE')}">{:L('BLOCK_USER')}</a>|
+								<a href="{:U('inventory/add',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="{:L('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:L('ACTIVATE_USER')}</a>
+							<else/>
+								<a href="{:U('inventory/add',array('id'=>$vo['id']))}"  style="color: #1ABC9C;">修改</a>|
+								<a href="{:U('inventory/add',array('id'=>$vo['id']))}"  style="color: #1ABC9C;">删除</a>
+							</neq>
+						</td>
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+			<div class="pagination">{$page}</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

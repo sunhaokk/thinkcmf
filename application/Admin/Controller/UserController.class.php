@@ -16,6 +16,7 @@ class UserController extends AdminbaseController{
 	// 管理员列表
 	public function index(){
 		$where = array("user_type"=>1);
+		
 		/**搜索条件**/
 		$user_login = I('request.user_login');
 		$user_email = trim(I('request.user_email'));
@@ -28,12 +29,15 @@ class UserController extends AdminbaseController{
 		}
 		
 		$count=$this->users_model->where($where)->count();
+
 		$page = $this->page($count, 20);
+		var_dump($page);exit;
         $users = $this->users_model
             ->where($where)
             ->order("create_time DESC")
             ->limit($page->firstRow, $page->listRows)
             ->select();
+            
 		$roles_src=$this->role_model->select();
 		$roles=array();
 		foreach ($roles_src as $r){
