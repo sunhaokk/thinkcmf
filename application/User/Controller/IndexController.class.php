@@ -41,6 +41,8 @@ class IndexController extends HomebaseController {
     		echo uc_user_synlogout();
     	}
     	session("user",null);//只有前台用户退出
+        session("wuliu",null);//只有前台用户退出
+        session("trade",null);//只有前台用户退出
     	redirect(__ROOT__."/");
     }
 

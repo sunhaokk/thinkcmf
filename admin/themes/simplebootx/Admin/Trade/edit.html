@@ -1,0 +1,49 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('Trade/index')}">公司列表</a></li>
+			<!-- <li><a href="{:U('Trade/add')}">添加公司</a></li> -->
+			<li class="active"><a>修改信息</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Trade/edit_post')}">
+			<fieldset>
+			
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>公司名称</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="trade_name" value="{$trade.trade_name}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>负责人</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="trade_principal" value="{$trade.trade_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>公司地址</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="trade_add" value="{$trade.trade_add}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>联系方式</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="trade_contact" value="{$trade.trade_contact}" required>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Trade/tradeinfo')}">公司列表</a></li>
+			<li><a href="{:U('Trade/add')}">添加公司</a></li>
+		</ul>
+        <form class="well form-search" method="post" action="{:U('Trade/index')}">
+            用户名:
+            <input type="text" name="user_login" style="width: 300px;" value="{:I('request.trade_name/s','')}" placeholder="请输入用户名">
+            
+            <input type="submit" class="btn btn-primary" value="搜索" />
+            <a class="btn btn-danger" href="{:U('Trade/index')}">清空</a>
+        </form>
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>负责人ID</th>
+					<th>公司名称</th>
+					<th>地址</th>
+					<th>联系方式</th>
+					<th>负责人名称</th>
+					<th width="120">{:L('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php> -->
+				<foreach name='trade' item='trade'>
+				<tr>
+					<td>{$trade.trade_id}</td>
+					<td>{$trade.user_id}</td>
+					<td>{$trade.trade_name}</td>
+					<td>{$trade.trade_add}</td>
+					<td>{$trade.trade_contact}</td>
+					<td>{$trade.trade_principal}</td>
+					<td>
+						<if condition="$trade['trade_id'] eq 1 || $trade['trade_id'] eq sp_get_current_admin_id()">
+						<font color="#cccccc">{:L('EDIT')}</font> | <font color="#cccccc">{:L('DELETE')}</font> |
+							<if condition="$trade['user_status'] eq 1">
+								<font color="#cccccc">{:L('BLOCK_USER')}</font>
+							<else />
+								<font color="#cccccc">{:L('ACTIVATE_USER')}</font>
+							</if>
+						<else />
+							<a href='{:U("Trade/edit",array("trade_id"=>$trade["trade_id"]))}'>{:L('EDIT')}</a> |
+							<if condition="$trade['user_status'] eq 1">
+								<a href="{:U('Trade/ban',array('trade_id'=>$trade['trade_id']))}" class="js-ajax-dialog-btn" data-msg="{:L('BLOCK_USER_CONFIRM_MESSAGE')}">{:L('BLOCK_USER')}</a> | 
+							<else />
+								<a href="{:U('Trade/cancelban',array('trade_id'=>$trade['trade_id']))}" class="js-ajax-dialog-btn" data-msg="{:L('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:L('ACTIVATE_USER')}</a> | 
+							</if>
+							<a class="js-ajax-delete" href="{:U('user/delete',array('trade_id'=>$trade['trade_id']))}">{:L('DELETE')}</a>
+						</if>
+					</td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

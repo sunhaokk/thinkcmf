@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{$name} {$seo_title} {$site_name}</title>
+  <meta name="keywords" content="{$seo_keywords}" />
+  <meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+    <br>
+    <script type="text/javascript" src="__TMPL__Public/assets/js/jquery-latest.js"></script>
+</head>
+<body>
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+<!-- saved from url=(0056)http://www.sf-express.com/cn/sc/dynamic_functions/store/ -->
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>货运查询</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="">
+  
+  <link href="__TMPL__Public/assets/files/main.css" rel="stylesheet">
+ 
+  <!-- build:js scripts/vendor/modernizr.js -->
+   <style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body class="language-sc">
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-2">
+        <div class="second-navigation">
+<h3>货运查询</h3>
+ <ul>
+      <li class="content-item"><a href="{:U('list/ydgz')}">运单跟踪</a> </li>
+      <li class="content-item"><a href="{:U('list/sxcx')}">运费时效查询</a> </li>
+      <li class="content-item current"><span>服务网点</span></li>
+      <li class="content-item"><a href="{:U('list/ssfw')}">收送范围</a> </li>
+      <li class="content-item"><a href="{:U('list/sjbz')}">收寄标准查询</a> </li>
+</ul>
+        </div>
+      </div>
+      <div class="col-xs-7 main-content">
+        <div id="function">
+
+<div class="store-page store-view">
+  <link rel="stylesheet" href="__TMPL__Public/assets/files/style.css" type="text/css" "="">
+ 
+    <!-- 2016年12月26日18:59:43二级联动 -->
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('#select').change(function(){
+      var name=$(this).val();
+      $.post("{:U('List/select1')}",{data:name},
+        function(result){
+          console.log(result);
+          var len = result.data.length;
+          var html= '';
+          for(var i=0;i<len;i++){
+            $('#s_id').append('<option>'+result.data[i]['wuliu_add']+'</option>');
+          }
+        },"json");
+        $('#s_id option').remove();
+    });
+
+  });
+</script>
+
+  <div class="main-content-row store-input-view no-header">
+    <h5><span class="sfi glyphisfiarker"></span>查询网点信息</h5>
+<form method="post" action="{:U('List/fwwd_post')}">
+    <div class="store-location-search">
+      <div class="detail-location-input store-address-picker" data-max-level="4" data-do-save-state="true" data-do-restore-state="true" data-hide-globe="true">
+        <div class="input-group">
+          <div class="controls">
+            <select name="wuliu_name" id="select" style="width: 500px">
+                  <option>   请选择要查询的物流公司，例如橙果</option>
+                  <volist name="result" id='vo' >
+                  <option required>{$vo.wuliu_name}</option>
+                </volist>     
+            </select>
+          </div>  
+        </div>
+        <br>
+     <div class="store-location-search">
+      <div class="detail-location-input store-address-picker" data-max-level="4" data-do-save-state="true" data-do-restore-state="true" data-hide-globe="true">
+    <div class="input-group">
+          <div class="controls">
+              <select name="warehouse_add" id="s_id" style="width: 230px">
+              <option required>请选择仓库地址</option>
+              </select>
+          </div>  
+        </div>
+        </div>
+        </div>
+      <input id="queryBill" type="submit" class="primary-button" data-loading-text="查询中..." value="    查询    "></input> 
+
+</div>
+</div>
+</form>
+    <tc_include file="Public:footer" />
+</div>
+<tc_include file="Public:scripts" />
+</body>
+</html>
+
+<script type="text/javascript">
+$(function(){
+  $('p').bind('click dlbclick mouseover mouseout',function(event){
+    $('div').html("事件:"+event.type)
+  })  
+})
+</script>

@@ -1,0 +1,89 @@
+<admintpl file="header" />
+<!-- 根据选择公司显示所属库存 -->
+<script type="text/javascript">
+	$(function(){
+		$('select').change(function(){
+			var name=$(this).val();
+			$.post("{:U('Shopdetails/select1')}",{data:name},
+				function(result){
+					var len = result.data.length;
+					var html= '';
+					for(var i=0;i<len;i++){
+						$('#s_id').append('<option>'+result.data[i]['stock_id']+'</option>');
+					}
+				},"json");
+				$('#s_id option').remove();
+		});
+
+	});
+</script>
+<!-- <script>
+	$(document).ready(function(){
+		$('#select').change(function(){
+			var name = $(this).val();
+			$.post("{:U('Shopdetails/select1')}",{data:name},
+				function(result){
+					//var data = eval("'"+data+"'");
+					console.log(result);
+					var len = result.data.length;
+					console.log(len);
+					var html = '';
+					var selObj = $("#s_id");
+					var selOpt = $("#s_id option");
+					selOpt.remove();
+					for(var i=0;i<len;i++){
+						selObj.append('<option>'+result.data[i]['stock_id']+'</option>');
+					}
+					console.log(html);
+					},"json")
+				});
+			});
+</script> -->
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Shopdetails/shopdetails_add')}">添加</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Shopdetails/shopdetails_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>物流编号</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="wuliu_code" value="{$wuliu_code}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>客户公司</label>
+					<div class="controls">
+						<select name="trade_name" id="select">
+							<option>请选择公司</option>
+							<volist name="trade" id='vo'>
+							<option>{$vo.trade_name}</option>
+							</volist>			
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>库存ID</label>
+					<div class="controls">
+						<select name="stock_id" id="s_id">		
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>数量</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="shopdetails_number" value="" required>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	</script>
+</body>
+</html>

@@ -1,11 +1,24 @@
 <admintpl file="header" />
 </head>
 <body>
+<style type="text/css">
+.pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+.pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+.pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="{:U('library/index')}">仓库列表</a></li>
 			<li><a href="{:U('Library/library_add')}">添加仓库</a></li>
 		</ul>
+		<form class="well form-search" method="post" action="{:U('Library/index')}">
+            负责人:
+            <input type="text" name="warehouse_principal" style="width: 150px;" value="{:I('request.warehouse_principal/s','')}" placeholder="请输入公司名称">
+            联系方式:
+            <input type="text" name="warehouse_principal_contact" style="width: 170px;" value="{:I('request.warehouse_principal_contact/s','')}" placeholder="请输入公司联系方式">
+            <input type="submit" class="btn btn-primary" value="搜索" />
+            <a class="btn btn-danger" href="{:U('Library/index')}">清空</a>
+        </form>
 		<form action="{:U('Rbac/listorders')}" method="post">
 			<table class="table table-hover table-bordered">
 				<thead>
@@ -32,6 +45,7 @@
 			</table>
 		</form>
 	</div>
+	<div class="pagelist">{$page}</div>
 	<script src="__PUBLIC__/js/common.js"></script>
 </body>
 </html>

@@ -79,25 +79,28 @@ class PublicController extends TradebaseController {
     		
     		$result = $user->where($where)->find();
             if(!empty($result) && $result['user_type']==2){
-    			if(sp_compare_password($pass,$result['user_pass'])){
-    				
-    				$role_user_model=M("OswTradeRoleUser");
-    				
-    				$role_user_join = C('DB_PREFIX').'osw_trade_role as b on a.role_id =b.id';
+                if(sp_compare_password($pass,$result['user_pass'])){
+                    
+                    $role_user_model=M("OswTradeRoleUser");                 
+                   
+                    $role_user_join = C('DB_PREFIX').'osw_trade_role as b on a.role_id =b.id';
 
-    				$groups=$role_user_model->alias("a")->join($role_user_join)->where(array("user_id"=>$result["id"],"status"=>1))->getField("role_id",true);
+                    $groups=$role_user_model->alias("a")->join($role_user_join)->where(array("user_id"=>$result["id"],"status"=>1))->getField("role_id",true);
+                    
                     if( $result["id"]!=1 && ( empty($groups) || empty($result['user_status']) ) ){
-    					$this->error(L('USE_DISABLED'));
-    				}
+                        $this->error(L('USE_DISABLED'));
+                    }
                     $trade = M("OswTrade");
                     $row = $trade->where('user_id='.$result['id'])->find();
+                    
                     if(empty($row)){
                         $trade_user = M('OswTradeUser');
                         $trade_id = $trade_user->where('user_id='.$result['id'])->getField('trade_id');
                         $row = $trade->where('trade_id='.$trade_id)->find();
+
                     }
                     if(empty($row)){
-                        $this->error('无法获取你的公司信息！');
+                        $this->error('无法获取你公司的信息！');
                     }
 
                     session('TRADE',$row);
@@ -107,19 +110,18 @@ class PublicController extends TradebaseController {
 
                     session('USER_ID',$result["id"]);
                     session('name',$result["user_login"]);
-    				//登入成功页面跳转
-    				$result['last_login_ip']=get_client_ip(0,true);
-    				$result['last_login_time']=date("Y-m-d H:i:s");
-    				$user->save($result);
-    				cookie("admin_username",$name,3600*24*30);
-    				$this->success(L('LOGIN_SUCCESS'),U("Index/index"));
-    			}else{
-    				$this->error(L('PASSWORD_NOT_RIGHT'));
-    			}
-    		}else{
-    			$this->error(L('USERNAME_NOT_EXIST'));
-    		}
-    	}
+                    $result['last_login_ip']=get_client_ip(0,true);
+                    $result['last_login_time']=date("Y-m-d H:i:s");
+                    $user->save($result);
+                    cookie("admin_username",$name,3600*24*30);
+                    $this->success(L('LOGIN_SUCCESS'),U("Index/index"));
+                }else{
+                    $this->error(L('PASSWORD_NOT_RIGHT'));
+                }
+            }else{
+                $this->error(L('USERNAME_NOT_EXIST'));
+            }
+        }
     }
 
 }

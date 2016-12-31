@@ -122,7 +122,7 @@ abstract class ThinkOauth{
 	/**
 	 * 初始化配置
 	 */
-	private function config(){
+	public function config(){
 		$config = C("THINK_SDK_{$this->Type}");
 		if(!empty($config['AUTHORIZE']))
 			$this->Authorize = $config['AUTHORIZE'];

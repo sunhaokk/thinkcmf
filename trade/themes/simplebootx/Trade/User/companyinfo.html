@@ -4,14 +4,32 @@
 	<div class="wrap">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="{:U('User/companyinfo')}">公司信息</a></li>
-			<li><a href="{:U('setting/company')}">修改密码</a></li>
+			
 		</ul>
 		<form class="form-horizontal js-ajax-form" method="post" action="{:U('User/companyinfo_post')}">
 			<fieldset>
-			<div class="control-group">
-					<label class="control-label" for="input-user_url"><span class="form-required">*</span>公司名称</label>
+				<div class="control-group">
+					<label class="control-label" for="input-trade_name"><span class="form-required">*</span>公司名称</label>
 					<div class="controls">
-						<input type="text" id="input-user_url" placeholder="" name="user_url" value="{$user_url}">
+						<input type="text" id="input-trade_name" placeholder="" name="trade_name" value="{$trade_name}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-trade_add"><span class="form-required">*</span>地址</label>
+					<div class="controls">
+						<input type="text" id="input-trade_add" placeholder="" name="trade_add" value="{$trade_add}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-trade_contact"><span class="form-required">*</span>联系方式</label>
+					<div class="controls">
+						<input type="text" id="input-trade_contact" placeholder="" name="trade_contact" value="{$trade_contact}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-trade_principal"><span class="form-required">*</span>负责人名称</label>
+					<div class="controls">
+						<input type="text" id="input-trade_principal" placeholder="" name="trade_principal" value="{$trade_principal}">
 					</div>
 				</div>
 				<!-- <div class="control-group">
@@ -21,19 +39,19 @@
 						<input type="text" id="input-user_nicename" name="user_nicename" value="{$user_nicename}" required>
 					</div>
 				</div> -->
-				<div class="control-group">
+				<!-- <div class="control-group">
 					<label class="control-label" for="input-birthday"><span class="form-required">*</span>成立时间</label>
 					<div class="controls">
 						<input class="js-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$birthday}" required>
 					</div>
-				</div>
+				</div> -->
 				
-				<div class="control-group">
+				<!-- <div class="control-group">
 					<label class="control-label" for="input-signature">公司地址</label>
 					<div class="controls">
 						<textarea id="input-signature" placeholder="请填写公司地址" name="signature">{$signature}</textarea>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-actions">
 					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
 				</div>

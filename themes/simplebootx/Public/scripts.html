@@ -26,10 +26,14 @@ $(function(){
 			if(data.user.avatar){
 				$("#main-menu-user .headicon").attr("src",data.user.avatar.indexOf("http")==0?data.user.avatar:"{:sp_get_image_url('[AVATAR]','!avatar')}".replace('[AVATAR]',data.user.avatar));
 			}
-			
 			$("#main-menu-user .user-nicename").text(data.user.user_nicename!=""?data.user.user_nicename:data.user.user_login);
 			$("#main-menu-user li.login").show();
-			
+			if(data.user.trade){
+				$("#main-menu-user li ul li.trade").show();
+			}
+			if(data.user.wuliu){
+				$("#main-menu-user li ul li.wuliu").show();
+			}
 		}
 		if(data.status==0){
 			$("#main-menu-user li.offline").show();

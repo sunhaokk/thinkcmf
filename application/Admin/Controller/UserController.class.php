@@ -31,7 +31,7 @@ class UserController extends AdminbaseController{
 		$count=$this->users_model->where($where)->count();
 
 		$page = $this->page($count, 20);
-		var_dump($page);exit;
+		
         $users = $this->users_model
             ->where($where)
             ->order("create_time DESC")

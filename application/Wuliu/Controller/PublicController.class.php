@@ -83,7 +83,7 @@ class PublicController extends WuliubaseController {
     			if(sp_compare_password($pass,$result['user_pass'])){
     				
     				$role_user_model=M("OswWuliuRoleUser");   				
-                    //C('DB_PREFIX')=cmf_; 注释
+                   
     				$role_user_join = C('DB_PREFIX').'osw_wuliu_role as b on a.role_id =b.id';
 
     				$groups=$role_user_model->alias("a")->join($role_user_join)->where(array("user_id"=>$result["id"],"status"=>1))->getField("role_id",true);
@@ -92,12 +92,13 @@ class PublicController extends WuliubaseController {
     				}
                     $wuliu = M("OswWuliu");
                     $row = $wuliu->where('user_id='.$result['id'])->find();
+                    
                     if(empty($row)){
                         $wuliu_user = M('OswWuliuUser');
                         $wuliu_id = $wuliu_user->where('user_id='.$result['id'])->getField('wuliu_id');
                         $row = $wuliu->where('wuliu_id='.$wuliu_id)->find();
-                    }
 
+                    }
                     if(empty($row)){
                         $this->error('无法获取你的公司信息！');
                     }

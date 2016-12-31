@@ -1,0 +1,89 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Freight/freight_add')}">出货</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Freight/freight_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename" required><span class="form-required" required>*</span>选择货柜</label>
+					<div class="controls" required>
+						<select name="container_id">
+							<option required>请选择货柜</option>
+								<volist name="container" id='vo'>
+									<option required>{$vo.container_id}</option>
+								</volist>			
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>物流编号</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="wuliu_code" value="{$order}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>起始地址</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="initial_address" value="{$library_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>最终地址</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="final_address" value="{$library_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>实际重量</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="actual_weight" value="{$library_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>实际体积</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="actual_bulk" value="{$library_principal_contact}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>总数量</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="all_amount" value="{$library_add}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-birthday"><span class="form-required">*</span>发货时间</label>
+					<div class="controls">
+						<input class="js-datetime" type="text" id="input-birthday" placeholder="" name="delivery_time" value="" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-birthday"><span class="form-required">*</span>预计到达时间</label>
+					<div class="controls">
+						<input class="js-datetime" type="text" id="input-birthday" placeholder="" name="estimated_time" value="" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-birthday"><span class="form-required">*</span>确认到达时间</label>
+					<div class="controls">
+						<input class="js-datetime" type="text" id="input-birthday" placeholder="" name="arrive_time" value="" >
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>操作人</label>
+					<div class="controls">
+						<input type="text" id="input-user_nicename" name="freight_operator" value="{$library_principal_contact}" >
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

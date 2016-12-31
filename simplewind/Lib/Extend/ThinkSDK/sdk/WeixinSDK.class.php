@@ -25,7 +25,7 @@ class WeixinSDK extends ThinkOauth{
                 'redirect_uri'=>$this->Callback,
                 'response_type'=>'code',
                 'scope'=>'snsapi_login'
-        );
+        );    
         return $this->GetRequestCodeURL . '?' . http_build_query($params);
     }
     

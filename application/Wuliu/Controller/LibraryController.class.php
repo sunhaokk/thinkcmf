@@ -9,8 +9,28 @@ class LibraryController extends WuliubaseController{
 		//获取wuliu_id
 		$wuliu = session('WULIU');
 		$wuliu_id = $wuliu['wuliu_id'];
+
+		$where = array("wuliu_id"=>$wuliu_id);
+		/**搜索条件**/
+		$warehouse_principal = I('request.warehouse_principal');
+		$warehouse_principal_contact = trim(I('request.warehouse_principal_contact'));
+		if($warehouse_principal){
+			$where['warehouse_principal'] = array('like',"%$warehouse_principal%");
+		}
+		if($warehouse_principal_contact){
+			$where['warehouse_principal_contact'] = array('like',"%$warehouse_principal_contact%");;
+		}
+		
+		$count=M('OswWarehouse')->where($where)->count();
+		$page = $this->page($count,5);
+		$show = $page->show();
+        $library = M('OswWarehouse')
+            ->where($where)
+            ->order("wuliu_id DESC")
+            ->limit($page->firstRow, $page->listRows)
+            ->select();
 		//查找仓库
-		$library =M('OswWarehouse')->where(array('wuliu_id'=>$wuliu_id))->select();
+        $this->assign('page',$show);
 		$this->assign('library',$library);
 		$this->display();
 	}

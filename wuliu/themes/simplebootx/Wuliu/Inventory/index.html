@@ -1,0 +1,66 @@
+<admintpl file="header" />
+</head>
+<style type="text/css">
+.pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+.pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+.pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('inventory/index')}">库存列表</a></li>
+			<li><a href="{:U('Inventory/inventory_add')}">入库</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Inventory/index')}">
+            公司名称:
+            <input type="text" name="trade_name" style="width: 150px;" value="{:I('request.trade_name/s','')}" placeholder="公司名称/仓库地址/货物类型名称">
+            <input type="submit" class="btn btn-primary" value="搜索" />
+            <a class="btn btn-danger" href="{:U('Inventory/index')}">清空</a>
+        </form>
+		<form action="{:U('Inventory/inventory_edit')}" method="post">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="30">ID</th>
+						<th align="left">库存名称</th>
+						<th align="left">仓库地址</th>
+						<th align="left">外贸公司</th>
+						<th align="left">货柜类型</th>
+						<th align="left">重量</th>
+						<th align="left">体积</th>
+						<th align="left">数量</th>
+						<th align="left">剩余数量</th>
+						<th align="left">入库时间</th>
+						<th width="120" align="left">备注</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="inventory" item="vo">
+					<tr>
+						<td>{$vo.stock_id}</td>
+						<td>{$vo.stock_name}</td>
+						<td>{$vo.warehouse_add}</td>
+						<td>{$vo.trade_name}</td>
+						<td>{$vo.cargo_type_name}</td>
+						<td>{$vo.container_weight}</td>
+						<td>{$vo.container_bulk}</td>
+						<td>{$vo.customer_number}</td>
+						<td>{$vo.customer_number_surplus}</td>
+						<td>{$vo.storage_time}</td>
+						<td>{$vo.stock_remark}</td>
+						<td><a href="{:U('Inventory/inventory_edit',array('stock_id'=>$vo['stock_id']))}">编辑</a>
+						<a class="js-ajax-delete" href="{:U('Inventory/inventory_delete',array('stock_id'=>$vo['stock_id']))}">{:L('DELETE')}</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<div class="easyui-dialog" style="width:400px;height:200px"
+    data-options="title:'My Dialog',collapsible:true,iconCls:'icon-ok',onOpen:function(){}">
+	</div>
+	<div class="pagelist">{$page}</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

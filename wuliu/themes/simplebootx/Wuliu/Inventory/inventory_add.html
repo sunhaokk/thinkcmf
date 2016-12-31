@@ -1,0 +1,105 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Inventory/inventory_add')}">入库</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="{:U('Inventory/inventory_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>仓库地址</label>
+					<div class="controls">
+						<select name="warehouse_add">
+							<option required>请选择仓库地址</option>
+								<volist name="row" id='vo'>
+									<option required>{$vo.warehouse_add}</option>
+								</volist>			
+						</select>
+					</div>	
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>外贸公司</label>
+					<div class="controls">
+						<select name="trade_name">
+							<option required>请选择公司</option>
+							<volist name="trade" id='vo'>
+							<option required>{$vo.trade_name}</option>
+							</volist>			
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>货柜类型</label>
+					<div class="controls">
+						<select name="cargo_type_name">						
+							<option required>请选择货柜</option>
+							<volist name="cargo" id='vo'>
+							<option required>{$vo.cargo_type_name}</option>
+						</volist>			
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>重量（吨）</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="container_weight" value="{$library_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>体积</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="container_bulkckg" value="{$library_principal_contact}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>体积（m³）</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="container_bulk" value="{$library_add}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>数量</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="customer_number" value="{$library_principal}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>剩余数量</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="customer_number_surplus" value="{$library_principal_contact}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-user_nicename"><span class="form-required">*</span>库存名称</label>
+					<div class="controls">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="text" id="input-user_nicename" name="stock_name" value="{$library_principal_contact}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-birthday"><span class="form-required">*</span>入库时间</label>
+					<div class="controls">
+						<input class="js-date" type="text" id="input-birthday" placeholder="" name="storage_time" value="{$birthday}" required>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">备注</label>
+					<div class="controls">
+						<textarea name="stock_remark" rows="2" cols="20" id="remark" class="inputtext" style="height: 100px; width: 500px;"></textarea>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

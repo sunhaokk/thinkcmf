@@ -1,0 +1,80 @@
+<admintpl file="header" />
+</head>
+<style type="text/css">
+.pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+.pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+.pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Freight/index')}">货运列表</a></li>
+			<li><a href="{:U('Freight/freight_add')}">出货</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Freight/index')}">
+            公司名称:
+            <input type="text" name="code" style="width: 150px;" value="{:I('request.code/s','')}" placeholder="物流编号/起始地址">
+            联系方式:
+            <input type="submit" class="btn btn-primary" value="搜索" />
+            <a class="btn btn-danger" href="{:U('Freight/index')}">清空</a>
+        </form>
+		<form action="{:U('Rbac/listorders')}" method="post">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th width="30">ID</th>
+						<th align="left">物流编号</th>
+						<th align="left">货柜编号</th>
+						<th align="left">起始地址</th>
+						<th align="left">最终地址</th>
+						<th align="left">实际重量</th>
+						<th align="left">实际体积</th>
+						<th align="left">总数量</th>
+						<th align="left">发货时间</th>
+						<th align="left">预计到达时间</th>
+						<th align="left">确认到达时间</th>
+						<th align="left">操作人</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="feright" item="vo">
+					<tr>
+						<td>{$vo.freight_id}</td>
+						<td id='btn'>{$vo.wuliu_code}</td>
+						<td>{$vo.container_id}</td>
+						<td>{$vo.initial_address}</td>
+						<td>{$vo.final_address}</td>
+						<td>{$vo.actual_weight}</td>
+						<td>{$vo.actual_bulk}</td>
+						<td>{$vo.all_amount}</td>
+						<td>{$vo.delivery_time|date='Y-m-d H:i:s',###}</td>
+						<td>{$vo.estimated_time|date='Y-m-d H:i:s',###}</td>
+						<if condition="$vo.arrive_time eq 0"><td></td>
+						<else/><td>{$vo.arrive_time|date='Y-m-d H:i:s',###}</td>
+						</if>
+						<td>{$vo.freight_operator}</td>
+						<td><a href="{:U('Freight/freight_edit',array('freight_id'=>$vo['freight_id']))}">编辑</a>
+						<a class="js-ajax-delete" href="{:U('Freight/freight_delete',array('freight_id'=>$vo['freight_id']))}">{:L('DELETE')}</a>
+						<a class="js-ajax-delete" href="{:U('Freight/freight_delete',array('freight_id'=>$vo['freight_id']))}">添加</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<div class="pagelist">{$page}</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">		
+		$(function(){
+			$('#btn').live('click',function(){
+				var id = $(this).prev().text();
+				var code = $(this).text();
+				console.log(id);
+				console.log(code);
+				window.location.href = "http://osw.orangesoft.com.cn/index.php?g=Wuliu&m=Shopdetails&a=index&code="+code;
+			})
+		})	
+	</script>
+</body>
+</html>
